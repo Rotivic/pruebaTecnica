@@ -7,12 +7,14 @@ Este es un proyecto Laravel para la prueba técnica. Antes de ejecutar el proyec
 1. Copia el archivo `.env.example` y créalo como `.env`.
 2. Abre el archivo `.env` y configura los detalles de tu base de datos MySQL. Asegúrate de establecer las siguientes variables:
 
+    ```
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
     DB_DATABASE=pruebatecnica
     DB_USERNAME=tu_usuario_mysql
     DB_PASSWORD=tu_contraseña_mysql
+    ```
 
 Reemplaza `tu_usuario_mysql` y `tu_contraseña_mysql` con tu nombre de usuario y contraseña de MySQL respectivamente.
 
@@ -33,8 +35,14 @@ Esto creará las tablas de la base de datos y llenará la base de datos con dato
 
 6. Una vez completados los pasos anteriores, puedes ejecutar el proyecto Laravel usando los siguientes comandos:
 
+     ```
     php artisan serve
+    ```
 
+    Esto iniciará un servidor de desarrollo y podrás acceder al proyecto desde tu navegador visitando `http://localhost:8000`.
+
+    ```
     npm run dev
+    ```
         
 Esto iniciará un servidor de desarrollo y podrás acceder al proyecto desde tu navegador visitando `http://localhost:` + el puerto que se habilite.
