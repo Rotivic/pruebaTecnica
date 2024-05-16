@@ -35,9 +35,10 @@ class AuthController extends Controller
 
             if($externalData) {
                 session(['user' => $externalData]);
+                return redirect()->intended('formulario')->with(['success' => 'Inicio de sesión exitoso.']);
             };
 
-            return redirect()->intended('formulario')->with(['success' => 'Inicio de sesión exitoso.']);
+            return back()->withErrors(['error' => 'No se pudieron obtener los datos del usuario.']);
         }
 
         return back()->withErrors([
