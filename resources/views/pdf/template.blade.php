@@ -15,6 +15,6 @@
 </style>
 
 <h1>Contenido de su formulario:</h1>
-<p>Nombre: {{ $user->name }}</p>
+<p>name: {{ $user->name }}</p>
 <p>Email: {{ $user->email }}</p>
 <img src="{{ $user->sign }}" alt="Canvas Image">

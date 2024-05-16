@@ -5,32 +5,43 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\EndpointController;
 
 class AuthController extends Controller
 {
+
+    public function mostrarLogin() {
+        return view('login');
+    }   
+
     public function login(Request $request)
     {
-        // Obtener los datos enviados desde el formulario de inicio de sesión
-        $usuario = $request->input('usuario');
-        $dni = $request->input('dni');
+         // Validar los datos del formulario de inicio de sesión
+         $credentials = $request->validate([
+            'usuario' => ['required', 'string'],
+            'dni' => ['required', 'string'],
+        ]);
 
-        // Consultar la base de datos para verificar las credenciales del usuario
-        $user = User::where('i_user', $usuario)->where('dni', $dni)->first();
+        // Buscar el usuario por i_user y dni
+        $user = User::where('i_user', $request->usuario)->where('dni', $request->dni)->first();
 
-
-        // Verificar si se encontró un usuario con las credenciales proporcionadas
         if ($user) {
-                 
+            // Iniciar sesión manualmente
+            Auth::login($user);
+            $request->session()->regenerate();
 
-            // Usuario encontrado, iniciar sesión
-            auth()->login($user);
+            $externalData = (new EndpointController())->cargarEndpoint($user->i_user, $user->dni);
 
-            // Redirigir al usuario a la página de formulario
-            return redirect()->route('formulario')->with(['success' => 'Inicio de sesión exitoso.' , 'user' => $user]);
-        } else {
-       
-            // Usuario no encontrado, mostrar mensaje de error
-            return redirect()->back()->with('error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+            if($externalData) {
+                session(['user' => $externalData]);
+            };
+
+            return redirect()->intended('formulario')->with(['success' => 'Inicio de sesión exitoso.']);
         }
+
+        return back()->withErrors([
+            'dni' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+        ])->withInput($request->only('usuario', 'dni'));
     }
 }

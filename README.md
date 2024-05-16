@@ -39,7 +39,7 @@ Esto creará las tablas de la base de datos y llenará la base de datos con dato
     php artisan serve
     ```
 
-    Esto iniciará un servidor de desarrollo y podrás acceder al proyecto desde tu navegador visitando `http://localhost:` + el puerto que esté disponible.
+    Esto iniciará un servidor de desarrollo y podrás acceder al proyecto desde tu navegador visitando `http://localhost:8000`.
 
     ```
     npm run dev

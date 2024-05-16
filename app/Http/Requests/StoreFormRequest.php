@@ -22,9 +22,25 @@ class StoreFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required', // Campo nombre requerido
+            'name' => 'required', // Campo name requerido
             'email' => 'required|email', // Campo email requerido y debe ser un formato de email válido
             'sign' => 'required',
+        ];
+    }
+
+    
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'El campo nombre es obligatorio.',
+            'email.required' => 'El campo email es obligatorio.',
+            'email.email' => 'El formato del email no es válido.',
+            'sign.required' => 'El campo firma es obligatorio.',
         ];
     }
 }

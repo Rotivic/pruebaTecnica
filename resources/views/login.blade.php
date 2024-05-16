@@ -1,10 +1,13 @@
 @extends('layout')
 
+@section('title', 'Login')
+
 @section('content')
+
 <div class="container" style="max-width: 400px;">
     <h1>Login</h1>
 
-    <form method="POST" action="{{ route('login') }}" >
+    <form method="POST" action="{{ route('inicio-sesion') }}" >
         @csrf
         <div class="form-group">
             <label for="usuario">Usuario:</label>
@@ -17,6 +20,5 @@
         <button type="submit" class="btn btn-primary my-2">Login</button>
     </form>
 </div>
-
 
 @endsection
