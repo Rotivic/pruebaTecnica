@@ -8,32 +8,49 @@
 
 @section('content')
 
-<h1>Formulario</h1>
 
-    @if(session('success'))
-        <div style="color: green;">{{ session('success') }}</div>
-    @endif
+
+@if(session('success'))
+    <div id="successAlert" class="alert alert-success alert-dismissible fade show floating-alert" role="alert">
+        {{ session('success') }}
+        
+    </div>
+@endif
+
+@if ($errors->any())
+    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show floating-alert" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<div class="container" style="max-width: 400px;">
+    <h1>Formulario</h1>
 
     <form action="{{ route('procesar.formulario') }}" method="POST">
         @csrf
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" value="vic" readonly><br><br>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" value="{{ session('user')->name ?? '' }}" class="form-control" style="width: 100%;">
+        </div>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" value="victormfdezfdez@gmail.com" readonly><br><br>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{ session('user')->email ?? '' }}" class="form-control" style="width: 100%;">
+        </div>
 
-        <label for="dni">Dni:</label><br>
-        <input type="dni" id="dni" name="dni" value="20953272L" readonly><br><br>
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="firma">Firma:</label>
+            <canvas id="firma" name="firma" width="400" height="200" style="border:1px solid #000; display: block;"></canvas>
+        </div>
 
-        <label for="firma">Firma:</label><br>
-        <canvas id="firma" name="firma" width="400" height="200" style="border:1px solid #000;"></canvas><br><br>
         <input type="hidden" id="sign" name="sign">
 
-        <button type="submit">Enviar formulario</button>
+        <button type="button" class="btn btn-secondary mb-2" id="clearButton">Limpiar firma</button>
+        <button type="submit" class="btn btn-primary mb-2">Enviar formulario</button>
     </form>
-
-
+</div>
 @endsection
-
-
-  

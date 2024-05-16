@@ -1,5 +1,6 @@
 // formulario.js
 var canvas = document.getElementById('firma');
+var clearButton = document.getElementById('clearButton');
 var ctx = canvas.getContext('2d');
 var drawing = false;
 
@@ -27,3 +28,19 @@ canvas.addEventListener('mouseleave', function(e) {
     drawing = false;
     document.getElementById('sign').value = canvas.toDataURL('image/png');
 });
+
+
+clearButton.addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    $('#sign').val('');
+})
+
+ // Desaparecer el mensaje de éxito después de 5 segundos
+ setTimeout(function() {
+    $('#successAlert').fadeOut('slow');
+}, 2000);
+
+// Desaparecer el mensaje de error después de 5 segundos
+setTimeout(function() {
+    $('#errorAlert').fadeOut('slow');
+}, 2000);

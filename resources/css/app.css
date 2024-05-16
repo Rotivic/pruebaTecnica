@@ -1,0 +1,7 @@
+.floating-alert {
+    position: fixed;
+    top: 20px; /* Puedes ajustar la posición vertical según tus necesidades */
+    right: 20px; /* Puedes ajustar la posición horizontal según tus necesidades */
+    z-index: 9999; /* Asegura que las alertas estén por encima de otros elementos */
+    width: 300px; /* Puedes ajustar el ancho según tus necesidades */
+}
